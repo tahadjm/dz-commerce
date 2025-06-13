@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id          String   @id @default(cuid())
+  name        String
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Billboards  Billboard[] @relation("StoreToBillboard")
+  Categories  Category[] @relation("StoreToCategroy")
+  Sizes       Size[] @relation("StoreToSize")
+  Colors      Color[] @relation("StoreToColor")
+  Products    Product[] @relation("StoreToProduct")
+  @@index([userId])
+}
+
+model Billboard {
+  id         String @id @default(cuid())
+  storeId    String
+  store      Store @relation("StoreToBillboard",fields: [storeId],references: [id])
+  Catagories Category[] @relation("BillboardToCategory")
+  label      String
+  ImageUrl   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Category{
+  id           String @id @default(cuid())
+  storeId      String
+  store        Store      @relation("StoreToCategroy",fields: [storeId],references: [id])
+  Products     Product[] @relation("CategoryToProduct")
+  billboardId  String
+  billboard    Billboard @relation("BillboardToCategory",fields: [billboardId],references: [id])
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@index([storeId])
+  @@index([billboardId])
+}
+
+model Size{
+  id          String @id @default(cuid())
+  storeId     String
+  Products    Product[] @relation("SizeToProduct")
+  store       Store @relation("StoreToSize",fields: [storeId],references: [id])
+  name        String
+  value       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([storeId])
+}
+
+
+model Color{
+  id          String @id @default(cuid())
+  storeId     String
+  store       Store @relation("StoreToColor",fields: [storeId],references: [id])
+  Products    Product[] @relation("ColorToImage")
+  name        String
+  value       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([storeId])
+}
+
+model Product{
+  id            String    @id @default(cuid())
+  name          String
+  price         Decimal
+  isFeatured    Boolean   @default(false)
+  isArchived    Boolean   @default(false)
+  Store         Store     @relation("StoreToProduct",fields: [storeId],references: [id])
+  Category      Category  @relation("CategoryToProduct",fields: [categoryId],references: [id])
+  Size          Size      @relation("SizeToProduct",fields: [sizeId],references: [id])
+  Color         Color     @relation("ColorToImage",fields: [colorId],references: [id])
+  Images        Image[]   @relation("ProductToImage")
+  storeId       String
+  categoryId    String
+  sizeId        String
+  colorId       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  @@index([id])
+  @@index([storeId])
+  @@index([sizeId])
+  @@index([categoryId])
+  @@index([colorId])
+}
+
+model Image{
+  id String @id @default(cuid())
+  ProductId String
+  Product Product @relation("ProductToImage",fields: [ProductId],references: [id],onDelete: Cascade)
+  @@index([ProductId])
+}
