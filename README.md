@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# dz-commerce
 
-## Getting Started
+**dz-commerce** is a modern full-stack e-commerce platform with an integrated admin dashboard. Built using the **Next.js 13 App Router**, it offers a seamless shopping experience for users and a powerful management interface for administrators.  
 
-First, run the development server:
+The platform provides features like product management, category handling, order tracking, and secure authentication — all wrapped in a clean and responsive UI.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+- 🛍️ Fully functional E-Commerce store with product pages and categories  
+- 📦 Admin dashboard for managing products, categories, sizes, colors, and orders  
+- 🔐 Secure authentication and authorization with Clerk  
+- 💳 Stripe integration for payments and checkout  
+- 🎨 Responsive UI with Tailwind CSS and dark mode support  
+- ⚡ Built with modern technologies (Next.js 13 App Router, Prisma, PlanetScale/MySQL, MongoDB, NextAuth)  
+
+## 🛠️ Tech Stack
+- **Frontend:** Next.js 13 (App Router), React, Tailwind CSS  
+- **Backend:** Prisma ORM, PlanetScale (MySQL), MongoDB  
+- **Auth:** Clerk, NextAuth  
+- **Payments:** Stripe  
+- **Deployment:** Vercel  
+
+## 📂 Project Structure
+```
+dz-commerce/
+├── admin/          # Admin dashboard for product & order management
+├── store/          # Frontend store with product pages
+├── components/     # Reusable UI components
+├── lib/            # Utilities and helpers
+├── prisma/         # Prisma schema and migrations
+├── public/         # Static assets
+└── .env            # Environment variables
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Installation
+```bash
+# Clone the repository
+git clone https://github.com/your-username/dz-commerce.git
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Navigate into the project
+cd dz-commerce
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Install dependencies
+npm install
 
-## Learn More
+# Run database migrations
+npx prisma migrate dev
 
-To learn more about Next.js, take a look at the following resources:
+# Start the development server
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Environment Variables
+Create a `.env` file in the root with the following (adjust as needed):
+```
+DATABASE_URL=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+STRIPE_SECRET_KEY=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ▶️ Usage
+```bash
+# Run development server
+npm run dev
 
-## Deploy on Vercel
+# Build for production
+npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Start production server
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎥 Demo
+🚧 Coming soon...  
+
+## 🤝 Contributing
+Contributions are welcome! Please fork the repo and create a PR.  
+
+## 📄 License
+MIT License  
